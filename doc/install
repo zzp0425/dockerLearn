@@ -1,0 +1,10 @@
+## install epel
+sudo rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+
+## install docker
+sudo yum -y install docker-io
+
+## start docker
+sudo service docker start
+
+## 
