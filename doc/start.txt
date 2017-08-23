@@ -1,0 +1,42 @@
+#-H标志调整守护进程绑定监听接口的方式
+docker daemon -H tcp://0.0.0.0:2375
+该命令会将docker守护进程绑定到宿主机上的所有网络接口
+也可以通过DOCKER_HOST环境变量来省略此步骤:
+export DOCKER_HOST="tcp://0.0.0.0:2375"
+
+
+#创建守护式容器
+sudo docker run --name zzp_first_docker -d ubuntu /bin/sh -c "while true; do echo hello world; sleep 1; done"
+
+#查看守护式容器日志
+sudo docker logs docker_name
+
+sudo docker ps 查看运行中的容器
+sudo docker ps -a查看全部容器
+
+#查看守护式容器的进程
+sudo docker top docker_name
+
+#docker统计信息
+sudo docker stats docker_name1 docker_name2
+
+#在docker内运行一个后台进程
+sudo docker exec -d docker_name touch /etc/zzp_test_exec
+
+#在docker内运行一个交互式任务
+sudo docker exec -i -t docker_name /bin/bash
+
+#停止守护式容器
+sudo docker stop docker_name
+或者sudo docker stop docker_id
+
+#自动重启容器
+1.sudo docker run --restart=always --name docker_name -d ubuntu /bin/sh -c "while true; do echo hello world; sleep 1;done"
+2.--restart=always无论什么原因退出,均重启docker容器
+3.--restart=on-failure当退出代码为非0时重启
+4.--restart=on-failure:5最多重启5次
+
+#容器详细信息
+sudo docker inspect docker_name
+#输出容器指定信息
+sudo docker inspect -f="{{.Config.Hostname}}" docker_name

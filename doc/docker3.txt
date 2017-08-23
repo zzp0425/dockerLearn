@@ -1,0 +1,4 @@
+docker run -i  -t ubuntu /bin/bash
+#-i 标志保证容器中的STDIN是开启的
+#-t 标志Docker为要创建的容器分配一个伪tty终端,这样,新建的容器才能提供一个交互式shell
+
